@@ -3,20 +3,33 @@ package jutil
 import (
 	"bufio"
 	"encoding/json"
+
 	// "fmt"
-	hook "github.com/robotn/gohook"
 	"io"
 	"io/ioutil" //io 工具包
 	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	hook "github.com/robotn/gohook"
 )
 
 const (
 	FILE_PATH = "out/"
 	FILE_TYPE = ".data"
 )
+
+func init() {
+	_, err := os.Stat(FILE_PATH) //创建输出目录
+	if err == nil {
+		return
+	}
+	if os.IsNotExist(err) {
+		os.MkdirAll(FILE_PATH, os.ModePerm)
+		return
+	}
+}
 
 func ToFile(evs []hook.Event, callback func(file string)) {
 	var fileName = strconv.FormatInt(time.Now().Unix(), 16) + FILE_TYPE
