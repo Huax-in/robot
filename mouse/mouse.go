@@ -2,11 +2,12 @@ package mouse
 
 import (
 	"fmt"
-	"github.com/go-vgo/robotgo"
 	"time"
+
+	"github.com/go-vgo/robotgo"
 )
 
-func Clicks(stop chan int, key string, times int) {
+func Clicks(stop chan int, key string, times float64) {
 	fmt.Println("mouse click start " + key)
 loop:
 	for {

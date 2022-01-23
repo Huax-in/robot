@@ -94,7 +94,7 @@ func init() {
 			ComboBox{
 				AssignTo:   &Main.times,
 				Value:      "1",
-				Model:      []string{"1", "10", "50", "100"},
+				Model:      []string{"1", "10", "50", "100", "0.1", "0.2", "0.4", "0.5", "0.01", "0.02"},
 				ColumnSpan: 2,
 			},
 			Label{
@@ -146,8 +146,8 @@ func (main *MainWin) GetStateText() string {
 	return main.state.Text()
 }
 
-func (main *MainWin) GetTimes() int {
-	times, _ := strconv.Atoi(Main.times.Text())
+func (main *MainWin) GetTimes() float64 {
+	times, _ := strconv.ParseFloat(Main.times.Text(), 64)
 	return times
 }
 
