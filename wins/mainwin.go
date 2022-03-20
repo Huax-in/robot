@@ -1,19 +1,17 @@
 package wins
 
 import (
+	"github.com/lxn/win"
 	"log"
 	"robot/mwd"
 
-	"github.com/lxn/win"
-
 	// "fmt"
+	"github.com/lxn/walk"
+	. "github.com/lxn/walk/declarative"
 	"robot/data"
 	"robot/jutil"
 	"strconv"
 	"strings"
-
-	"github.com/lxn/walk"
-	. "github.com/lxn/walk/declarative"
 )
 
 type MainWin struct {
@@ -73,13 +71,13 @@ func init() {
 			RadioButtonGroup{
 				DataMember: "Mouse",
 				Buttons: []RadioButton{
-					{
+					RadioButton{
 						Name:       "mouse",
 						Text:       "鼠标左键",
 						Value:      data.MOUSE_LEFT,
 						ColumnSpan: 2,
 					},
-					{
+					RadioButton{
 						Name:       "mouse",
 						Text:       "鼠标右键",
 						Value:      data.MOUSE_RIGHT,
@@ -94,7 +92,7 @@ func init() {
 			ComboBox{
 				AssignTo:   &Main.times,
 				Value:      "1",
-				Model:      []string{"1", "10", "50", "100", "0.1", "0.2", "0.4", "0.5", "0.01", "0.02"},
+				Model:      []string{"1", "10", "50", "100"},
 				ColumnSpan: 2,
 			},
 			Label{
@@ -146,8 +144,8 @@ func (main *MainWin) GetStateText() string {
 	return main.state.Text()
 }
 
-func (main *MainWin) GetTimes() float64 {
-	times, _ := strconv.ParseFloat(Main.times.Text(), 64)
+func (main *MainWin) GetTimes() int {
+	times, _ := strconv.Atoi(Main.times.Text())
 	return times
 }
 
